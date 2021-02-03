@@ -31,7 +31,12 @@
           update: update
         }
       };
+      var player;
+      var platforms;
+      var cursors;
+
       var game = new Phaser.Game(config);
+
       function preload() {
         this.load.image('sky', 'assets/sky.png');
         this.load.image('ground', 'assets/platform.png');
@@ -53,6 +58,8 @@
 
         player.setBounce(0.2);
         player.setCollideWorldBounds(true);
+        player.body.setGravityY(300);
+        this.physics.add.collider(player, platforms);
 
         this.anims.create({
           key: 'left',
@@ -73,8 +80,23 @@
           frameRate: 10,
           repeat: -1
         });
+
+        cursors = this.input.keyboard.createCursorKeys();
       }
       function update() {
+        if (cursors.left.isDown) {
+          player.setVelocityX(-160);
+          player.anims.play('left', true);
+        } else if (cursors.right.isDown) {
+          player.setVelocityX(160);
+          player.anims.play('right', true);
+        } else {
+          player.setVelocityX(0);
+          player.anims.play('turn');
+        }
+        if (cursors.up.isDown && player.body.touching.down) {
+          player.setVelocityY(-330);
+        }
       }
     </script>
   </body>
