@@ -9,12 +9,15 @@
     var config = {
       type: Phaser.AUTO, // Chooses over WebGL and Canvas
       title: "A light in the dark",
+      height: 320,
+      width: 320,
       physics: {
         default: 'arcade',
         arcade: {
           gravity: { y: 0 }
         }
       },
+      backgroundColor: '#555555',
       scene: {
         preload: preload,
         create: create,
@@ -26,19 +29,28 @@
 
     var game = new Phaser.Game(config);
 
-    function preload (){
-      this.load.image('mock-li', 'assets/images/li/mock-li.png');
+    function preload () {
+
+      this.load.image('mock-li', 'assets/images/li/mock-li16.png');
+      this.load.image('tiles', 'assets/images/tiles/tiles.png');
+      this.load.tilemapTiledJSON('map', 'assets/images/maze/map.json');
     }
 
     function create (){
-      player = this.physics.add.image(400, 300, 'mock-li');
+      var map = this.make.tilemap({ key: 'map' });
+
+      var tiles = map.addTilesetImage('tiles');
+
+      var belowLayer = map.createStaticLayer("Wall", tiles, 0, 0);
+
+      player = this.physics.add.image(100, 100, 'mock-li');
       cursors = this.input.keyboard.createCursorKeys();
       player.setCollideWorldBounds(true);
       player.body.setGravityY(0);
 
     }
     function update() {
-      moveControl(200);
+      moveControl(100);
       
     }
 
@@ -47,7 +59,7 @@
       player.setVelocityY(0);
 
       // multiples ifs instead of else if to keep the feature of
-      // moving diagonally by pressing adjacent keys
+      // moving diagonally by pressing adjacent keys at the same time
       if (cursors.left.isDown) player.setVelocityX(-velocity);
       if (cursors.right.isDown) player.setVelocityX(velocity);
       if (cursors.up.isDown) player.setVelocityY(-velocity);
