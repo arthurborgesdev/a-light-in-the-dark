@@ -38,10 +38,15 @@
 
     }
     function update() {
+      player.setVelocityX(0);
+      player.setVelocityY(0);
+
+      // multiples ifs instead of else if to keep the feature of
+      // moving diagonally by pressing adjacent keys
       if (cursors.left.isDown) player.setVelocityX(-100);
-      else if (cursors.right.isDown) player.setVelocityX(100);
-      else if (cursors.up.isDown) player.setVelocityY(-100);
-      else if (cursors.down.isDown) player.setVelocityY(100);
+      if (cursors.right.isDown) player.setVelocityX(100);
+      if (cursors.up.isDown) player.setVelocityY(-100);
+      if (cursors.down.isDown) player.setVelocityY(100);
     }
   </script>
 
