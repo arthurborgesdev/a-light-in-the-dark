@@ -1,0 +1,22 @@
+{
+  "name": "a-light-in-the-dark",
+  "version": "1.0.0",
+  "description": "A survival-horror 2D top-view indie game",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/arthurborgesdev/a-light-in-the-dark.git"
+  },
+  "author": "Arthur Borges",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/arthurborgesdev/a-light-in-the-dark/issues"
+  },
+  "homepage": "https://github.com/arthurborgesdev/a-light-in-the-dark#readme",
+  "dependencies": {
+    "phaser": "^3.52.0"
+  }
+}
