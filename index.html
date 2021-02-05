@@ -37,15 +37,18 @@
     }
 
     function create (){
-      var map = this.make.tilemap({ key: 'map' });
+      const map = this.make.tilemap({ key: 'map' });
 
-      var tiles = map.addTilesetImage('tiles');
+      const tiles = map.addTilesetImage('tiles');
 
-      var belowLayer = map.createStaticLayer("Wall", tiles, 0, 0);
+      const walls = map.createStaticLayer("Wall", tiles, 0, 0);
+        
+      walls.setCollisionByExclusion(-1, true);
 
-      player = this.physics.add.image(100, 100, 'mock-li');
+      player = this.physics.add.image(48, 128, 'mock-li');
       cursors = this.input.keyboard.createCursorKeys();
       player.setCollideWorldBounds(true);
+      this.physics.add.collider(player, walls);
       player.body.setGravityY(0);
 
     }
