@@ -53,6 +53,10 @@
       this.physics.add.collider(player, walls);
       player.body.setGravityY(0);
 
+      var light = this.lights.addLight(300, 200, 200);
+      
+      this.lights.enable().setAmbientColor(0x555555);
+
       this.anims.create({
         key: 'front',
         frames: this.anims.generateFrameNumbers('li', { start: 2, end: 3 }),
